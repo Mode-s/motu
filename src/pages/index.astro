@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Craftsmanship from '../components/Craftsmanship.astro';
 import BackToTop from '../components/BackToTop.astro';
+import SectionIndicator from '../components/SectionIndicator.astro';
 
 import Logo from '../images/logo-white-text.png';
 import heroImage from '../images/hero.jpg';
@@ -22,6 +23,16 @@ import menuImage from '../images/menu.png';
       <div class="hero-wrap">
         <Picture src={heroImage} alt="" />
         <div class="overlay" aria-hidden="true"></div>
+				<!-- left navigation -->
+				<nav class="hero-nav" aria-label="ページ内ナビゲーション">
+					<ul class="hero-nav-list">
+						<li><a href="#about"      class="hero-nav-link">ABOUT</a></li>
+						<li><a href="#commitment" class="hero-nav-link">COMMITMENT</a></li>
+						<li><a href="#menu"       class="hero-nav-link">MENU</a></li>
+						<li><a href="#contact"    class="hero-nav-link">CONTACT</a></li>
+						<li><a href="#info"       class="hero-nav-link">INFO</a></li>
+					</ul>
+				</nav>
         <div class="hero-content">
           <div class="logo-wrap">
             <Picture src={Logo} alt="かど屋もつ煮込み専門店のロゴ" />
@@ -31,7 +42,7 @@ import menuImage from '../images/menu.png';
     </section>
 
     <!------------ About ------------>
-    <section class="section about">
+    <section class="section about" id="about">
       <div class="inner">
         <div class="section-title">
           <h2 class="title">かど屋もつ煮込みとは</h2>
@@ -45,7 +56,7 @@ import menuImage from '../images/menu.png';
     </section>
 
     <!------------ Commitment ------------>
-    <section class="section commitment">
+    <section class="section commitment" id="commitment">
       <div class="inner">
         <div class="section-title">
           <h2 class="title">かど屋のこだわり</h2>
@@ -75,7 +86,7 @@ import menuImage from '../images/menu.png';
     </section>
 
     <!------------ Menu ------------>
-    <section class="section menu">
+    <section class="section menu" id="menu">
       <div class="inner">
         <div class="section-title">
           <h2 class="title">もつ煮込み弁当</h2>
@@ -89,7 +100,7 @@ import menuImage from '../images/menu.png';
     </section>
 
     <!------------ Contact ------------>
-    <section class="section contact">
+    <section class="section contact" id="contact">
       <div class="inner">
         <div class="section-title">
           <h2 class="title">お問い合わせ / ご予約</h2>
@@ -103,7 +114,7 @@ import menuImage from '../images/menu.png';
     </section>
 
     <!------------ Info ------------>
-    <section class="section info">
+    <section class="section info" id="info">
       <div class="inner">
         <div class="section-title">
           <h2 class="title">店舗情報</h2>
@@ -128,11 +139,26 @@ import menuImage from '../images/menu.png';
             </div>
           </dd>
         </dl>
+				<div class="map-inner">
+					<iframe
+						class="map-frame"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8!2d130.7376!3d32.7897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDQ3JzIyLjkiTiAxMzDCsDQ0JzE1LjQiRQ!5e0!3m2!1sja!2sjp!4v1234567890"
+						width="600"
+						height="450"
+						style="border:0;"
+						allowfullscreen=""
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						title="かど屋もつ煮込み専門店の地図"
+					></iframe>
+				</div>
       </div>
     </section>
 
     <BackToTop />
   </main>
+	<SectionIndicator />
+	
 
   <!------------ Footer ------------>
   <footer class="section footer">
@@ -179,6 +205,38 @@ import menuImage from '../images/menu.png';
     justify-content: center;
     z-index: 2;
   }
+
+	/* hero-nav */
+	.hero-nav {
+  	position: absolute;
+  	left: 32px;
+  	top: 50%;
+  	z-index: 200;
+  	transform: translateY(-50%);
+	}
+
+	.hero-nav-list {
+  	display: flex;
+  	flex-direction: column;
+  	gap: 20px;
+  	list-style: none;
+	}
+
+	.hero-nav-link {
+  	display: block;
+		padding: 10px;
+  	color: rgba(255, 255, 255, 0.6);
+  	font-size: 11px;
+  	font-weight: 700;
+  	letter-spacing: 0.2em;
+  	text-decoration: none;
+  	writing-mode: vertical-rl;
+  	transition: color 0.2s ease;
+
+  	&:hover {
+    	color: #fff;
+  	}
+	}
 
   /* about */
   .about .inner {
@@ -266,6 +324,17 @@ import menuImage from '../images/menu.png';
     font-size: 13px;
     font-weight: 700;
   }
+
+	.info .map-inner {
+  	max-width: 800px;
+  	margin: 40px auto 0;
+	}
+
+	.info .map-frame {
+		width: 100%;
+  	height: 250px;
+  	border-radius: 8px;
+	}
 
   /* footer */
   .footer {

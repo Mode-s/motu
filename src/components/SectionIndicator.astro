@@ -1,0 +1,111 @@
+---
+const sections = [
+  { id: 'about',      label: 'ABOUT' },
+  { id: 'commitment', label: 'COMMITMENT' },
+  { id: 'menu',       label: 'MENU' },
+  { id: 'contact',    label: 'CONTACT' },
+  { id: 'info',       label: 'INFO' },
+];
+---
+
+<nav class="indicator" aria-label="section-indicator">
+  <ul class="indicator-list">
+    {sections.map((s) => (
+      <li class="indicator-item">
+        <a href={`#${s.id}`} class="indicator-link" data-section={s.id} aria-label={s.label}>
+          <span class="indicator-dot"></span>
+          <span class="indicator-label">{s.label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style lang="scss">
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+  .indicator {
+    position: fixed;
+    top: 50%;
+    right: 24px;
+    z-index: 100;
+    transform: translateY(-50%);
+  }
+
+  .indicator-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .indicator-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    cursor: pointer;
+
+    /* ラベルは普段非表示、hover時に表示 */
+    &:hover .indicator-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    &.is-active .indicator-dot {
+      background-color: #C23B22;
+      transform: scale(1.4);
+    }
+  }
+
+  .indicator-dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .indicator-label {
+    position: absolute;
+    right: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #2A2420;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 3px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('.indicator-link');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        links.forEach((link) => {
+          link.classList.toggle('is-active', link.dataset.section === id);
+        });
+      });
+    },
+    {
+      // セクションの中央付近を通過したタイミングで切り替え
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: 0,
+    },
+  );
+
+  document.querySelectorAll<HTMLElement>('section[id]').forEach((el) => {
+    observer.observe(el);
+  });
+</script>
