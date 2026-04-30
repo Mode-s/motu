@@ -1,0 +1,40 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+body {
+  background: $color-bg;
+  line-height: 1.8;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.section {
+  padding: 70px 24px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(28px, 5vw, 40px);
+}
+
+.button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 10px 0;
+  border-radius: 60px;
+  background-color: $color-text;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.logo-wrap {
+  max-width: 500px;
+}
