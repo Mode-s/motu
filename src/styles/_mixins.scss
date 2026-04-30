@@ -1,3 +1,9 @@
+@mixin sp {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
 @keyframes badgePulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.06); }

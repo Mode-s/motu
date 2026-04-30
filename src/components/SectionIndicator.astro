@@ -31,6 +31,18 @@ const sections = [
     right: 24px;
     z-index: 100;
     transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    &.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @include sp {
+      display: none;
+    }
   }
 
   .indicator-list {
@@ -86,26 +98,38 @@ const sections = [
 </style>
 
 <script>
-  const links = document.querySelectorAll<HTMLAnchorElement>('.indicator-link');
+const indicator = document.querySelector<HTMLElement>('.indicator');
+const hero = document.querySelector<HTMLElement>('.hero');
+const links = document.querySelectorAll<HTMLAnchorElement>('.indicator-link');
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const id = entry.target.id;
-        links.forEach((link) => {
-          link.classList.toggle('is-active', link.dataset.section === id);
-        });
+// ─── 表示 / 非表示 ───────────────────────────────
+const toggleIndicator = () => {
+  if (!indicator || !hero) return;
+  const heroBottom = hero.getBoundingClientRect().bottom;
+  indicator.classList.toggle('is-visible', heroBottom < 0);
+};
+
+window.addEventListener('scroll', toggleIndicator, { passive: true });
+toggleIndicator();
+
+// ─── アクティブセクションの切り替え ──────────────
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      links.forEach((link) => {
+        link.classList.toggle('is-active', link.dataset.section === id);
       });
-    },
-    {
-      // セクションの中央付近を通過したタイミングで切り替え
-      rootMargin: '-40% 0px -40% 0px',
-      threshold: 0,
-    },
-  );
+    });
+  },
+  {
+    rootMargin: '-40% 0px -40% 0px',
+    threshold: 0,
+  },
+);
 
-  document.querySelectorAll<HTMLElement>('section[id]').forEach((el) => {
-    observer.observe(el);
-  });
+document.querySelectorAll<HTMLElement>('section[id]').forEach((el) => {
+  observer.observe(el);
+});
 </script>
