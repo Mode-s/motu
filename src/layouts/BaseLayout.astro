@@ -19,6 +19,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toStri
 		<meta name="description" content={description} />
 		<meta name="robots" content="index, follow" />
 		<link rel="canonical" href={canonicalUrl} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="ja_JP" />

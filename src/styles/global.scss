@@ -10,7 +10,9 @@ html {
 }
 
 body {
+  font-family: 'Zen Maru Gothic', sans-serif;
   background: $color-bg;
+  color: $color-text;
   line-height: 1.8;
 }
 
@@ -27,7 +29,7 @@ img {
 
 .section-title {
   text-align: center;
-  font-size: clamp(28px, 5vw, 40px);
+  font-size: clamp($font-size-xl, 5vw, 2.5rem);
 }
 
 .button {
@@ -39,10 +41,21 @@ img {
   border-radius: 60px;
   background-color: $color-text;
   color: #fff;
+  font-size: $font-size-base;
   text-align: center;
   text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $color-accent;
+  }
 }
 
 .logo-wrap {
   max-width: 500px;
+}
+
+[data-icon] {
+  width: 1.2em;
+  height: 1.2em;
 }

@@ -1,5 +1,11 @@
-@mixin sp {
+@mixin tablet {
   @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin sp {
+  @media (max-width: 470px) {
     @content;
   }
 }

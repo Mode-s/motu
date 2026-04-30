@@ -1,11 +1,15 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 const sections = [
-  { id: 'about',      label: 'ABOUT' },
-  { id: 'commitment', label: 'COMMITMENT' },
-  { id: 'menu',       label: 'MENU' },
-  { id: 'contact',    label: 'CONTACT' },
-  { id: 'info',       label: 'INFO' },
+  { id: 'about',      label: 'かど屋もつ煮込みとは' },
+  { id: 'commitment', label: 'かど屋のこだわり' },
+  { id: 'menu',       label: 'メニュー' },
+  { id: 'contact',    label: 'お問い合わせ / ご予約' },
+  { id: 'info',       label: '店舗情報' },
 ];
+
+const instagramUrl = 'https://www.instagram.com/kadoya_motsu2?igsh=ZGNmazhoc2V2b3o%3D&utm_source=qr';
 ---
 
 <div class="hamburger-menu">
@@ -30,6 +34,15 @@ const sections = [
           <a href={`#${s.id}`} class="hamburger-link">{s.label}</a>
         </li>
       ))}
+        <!-- アンダーライン -->
+        <li class="hamburger-divider" aria-hidden="true"></li>
+
+        <!-- Instagramリンク -->
+        <li class="hamburger-item">
+          <a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="hamburger-link hamburger-sns">
+            <Icon name="mdi:instagram" />
+          </a>
+        </li>
     </ul>
   </nav>
 
@@ -45,7 +58,7 @@ const sections = [
   .hamburger-menu {
     display: none;
 
-    @include sp {
+    @include tablet {
       display: block;
     }
   }
@@ -129,14 +142,46 @@ const sections = [
   /* メニューリンク */
   .hamburger-link {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.75rem;
+    font-size: $font-size-xs;
     font-weight: 700;
     letter-spacing: 0.3em;
     text-decoration: none;
     transition: color 0.2s ease;
 
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background-color: #fff;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
     &:hover {
       color: #fff;
+
+      &::after {
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .hamburger-divider {
+    width: 270px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 auto;
+  }
+
+  .hamburger-sns {
+    font-size: 1.5rem;
+
+    [data-icon] {
+      width: 1.5em;
+      height: 1.5em;
     }
   }
 
