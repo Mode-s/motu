@@ -160,6 +160,12 @@ import menuImage from '../images/menu.png';
       <small class="copyright">&copy; 2026 かど屋もつ煮込み専門店</small>
     </div>
   </footer>
+	<script>
+		import { initAnimations } from '../scripts/animations';
+	
+		// DOMが構築されてから実行
+		document.addEventListener('DOMContentLoaded', initAnimations);
+	</script>
 </BaseLayout>
 
 <style lang="scss">
@@ -438,4 +444,27 @@ import menuImage from '../images/menu.png';
   .footer .logo-wrap {
     margin: 0 auto;
   }
+
+	/* ─── アニメーション初期状態 ─────────────────────────── */
+	/* reduced-motion でない場合のみ非表示にする */
+	@media (prefers-reduced-motion: no-preference) {
+  	.hero-content .logo-wrap {
+    	opacity: 0;
+  	}
+
+  	.hero-nav-link {
+    opacity: 0;
+  	}
+
+  	:global(.section-title),
+  	:global(.craftsmanship),
+  	:global(.craftsmanship-bg),
+  	.about .section-body :global(.text),
+  	.menu-image,
+  	.menu .text,
+  	.contact .actions :global(.button),
+  	.info-grid {
+    	opacity: 0;
+  	}
+	}
 </style>
