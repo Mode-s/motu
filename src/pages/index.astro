@@ -11,7 +11,7 @@ import Logo from '../images/logo-white-text.png';
 import heroImage from '../images/hero.jpg';
 import miso from '../images/miso.png';
 import goma from '../images/goma.png';
-import motu from '../images/motu.png';
+import motu from '../images/bg3.jpg';
 import riceBg from '../images/rice-bg.jpeg';
 import menuImage from '../images/menu.png';
 ---
@@ -38,6 +38,10 @@ import menuImage from '../images/menu.png';
         <div class="hero-content">
           <div class="logo-wrap">
             <Picture src={Logo} alt="かど屋もつ煮込み専門店のロゴ" />
+            <div class="actions">
+              <a href="tel:080-2786-0805" class="button"><Icon name="mdi:phone" />TEL</a>
+              <a href="https://www.instagram.com/kadoya_motsu2?igsh=ZGNmazhoc2V2b3o%3D&utm_source=qr" class="button" target="_blank" rel="noopener noreferrer"><Icon name="mdi:instagram" />Instagram</a>
+            </div>
           </div>
         </div>
       </div>
@@ -62,15 +66,15 @@ import menuImage from '../images/menu.png';
           <h2 class="title">かど屋のこだわり</h2>
         </div>
         <div class="commitment-list">
-          <Craftsmanship number="01" title="４つの味噌を独自ブレンド" image={miso} source="熊本橋本醤油 @hashimoto_shoyu_offial">
+          <Craftsmanship number="01" title="４つの味噌を独自ブレンド" image={miso} source="熊本橋本醤油 @hashimoto_shoyu_offial" isBg>
             <p class="text">その中のひとつ「米味噌」は、創業１００年を超える老舗、熊本橋本醤油さんの味噌です。</p>
             <p class="text">コクがあるのに、後味は軽い。だから気づいたら全部飲み干してます。<br /><br />なめらかで、ほんのり甘くてやさしい味わいで、もつの旨みをぐっと引き立ててくれます。</p>
           </Craftsmanship>
-          <Craftsmanship number="02" title="隠し味は老舗のすりごま" image={goma} reverse source="オニザキコーポレーション @onizaki_goma_official">
+          <Craftsmanship number="02" title="隠し味は老舗のすりごま" image={goma} reverse source="オニザキコーポレーション @onizaki_goma_official" isBg>
             <p class="text">かど屋のもつ煮込みは、実はすりごまを入れています。</p>
             <p class="text">使っているのは熊本の創業７０年を迎える、ごまの老舗オニザキコーポレーションさんのもの。<br /><br />香りが本当に良くて、仕上げに入れると味はまろやかになり一気に深みが増します。</p>
           </Craftsmanship>
-          <Craftsmanship number="03" title="国産豚ホルモン２日間じっくり煮込み" image={motu}>
+          <Craftsmanship number="03" title="国産豚ホルモン２日間じっくり煮込み" image={motu} isBg>
             <p class="text">かど屋は新鮮な国産豚ホルモンにこだわり、２日かけてじっくり煮込んでいます。</p>
             <p class="text">そのため、ふわふわでぷりぷりに仕上がっております。<br /><br />是非ご賞味ください。</p>
           </Craftsmanship>
@@ -255,6 +259,21 @@ import menuImage from '../images/menu.png';
     	}
   	}
 	}
+  .hero .actions {
+      margin-top: 20px;
+  }
+
+  .hero .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 8px;
+
+    @include tablet {
+      max-width: 200px;
+    }
+  }
 
   /* about */
   .about .inner {
